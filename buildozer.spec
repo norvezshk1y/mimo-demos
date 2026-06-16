@@ -19,7 +19,6 @@ android.gradle_dependencies =
 android.enable_androidx = True
 android.enable_jetifier = True
 android.accept_sdk_license = True
-p4a.branch = develop
 icon.filename = %(source.dir)s/icon.png
 
 [buildozer]
