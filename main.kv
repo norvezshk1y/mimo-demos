@@ -1,0 +1,234 @@
+#:kivy 2.0.0
+
+<MainScreen>:
+    name: 'main'
+
+    canvas.before:
+        Color:
+            rgba: 0.12, 0.13, 0.18, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 30
+        spacing: 15
+
+        Label:
+            text: 'Kivy Demo Collection'
+            font_size: '26sp'
+            size_hint_y: None
+            height: 60
+            color: 1, 1, 1, 1
+
+        Label:
+            text: 'Select a demo to run'
+            font_size: '14sp'
+            size_hint_y: None
+            height: 30
+            color: 0.6, 0.65, 0.75, 1
+
+        Widget:
+            size_hint_y: 0.1
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 12
+
+            Button:
+                text: 'Showcase'
+                font_size: '18sp'
+                size_hint_y: None
+                height: 60
+                background_color: 0.18, 0.55, 0.85, 1
+                on_release: root.manager.current = 'showcase'
+
+            Button:
+                text: 'Touchtracer'
+                font_size: '18sp'
+                size_hint_y: None
+                height: 60
+                background_color: 0.18, 0.65, 0.45, 1
+                on_release: root.manager.current = 'touchtracer'
+
+            Button:
+                text: 'Pictures'
+                font_size: '18sp'
+                size_hint_y: None
+                height: 60
+                background_color: 0.75, 0.45, 0.18, 1
+                on_release: root.manager.current = 'pictures'
+
+        Widget:
+            size_hint_y: 0.2
+
+        Label:
+            text: 'Powered by Kivy ' + kivy.__version__
+            font_size: '11sp'
+            size_hint_y: None
+            height: 25
+            color: 0.4, 0.42, 0.5, 1
+
+
+<ShowcaseScreen>:
+    name: 'showcase'
+
+    canvas.before:
+        Color:
+            rgba: 0.08, 0.09, 0.12, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'horizontal'
+        padding: 10
+        spacing: 10
+
+        BoxLayout:
+            size_hint_x: 0.32
+            orientation: 'vertical'
+            spacing: 6
+            padding: 8
+
+            Button:
+                text: '< Back'
+                size_hint_y: None
+                height: 48
+                font_size: '14sp'
+                background_color: 0.75, 0.2, 0.2, 1
+                on_release: root.manager.current = 'main'
+
+            Label:
+                text: 'Widgets & Layouts'
+                font_size: '15sp'
+                size_hint_y: None
+                height: 35
+                bold: True
+                color: 0.75, 0.8, 1, 1
+
+            ScrollView:
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: 5
+
+                    ToggleButton:
+                        text: 'Buttons'
+                        group: 'showcase'
+                        state: 'down'
+                        size_hint_y: None
+                        height: 44
+                        font_size: '13sp'
+                        on_state: if self.state == 'down': root.switch_demo('buttons')
+
+                    ToggleButton:
+                        text: 'Sliders'
+                        group: 'showcase'
+                        size_hint_y: None
+                        height: 44
+                        font_size: '13sp'
+                        on_state: if self.state == 'down': root.switch_demo('sliders')
+
+                    ToggleButton:
+                        text: 'Text Input'
+                        group: 'showcase'
+                        size_hint_y: None
+                        height: 44
+                        font_size: '13sp'
+                        on_state: if self.state == 'down': root.switch_demo('textinput')
+
+                    ToggleButton:
+                        text: 'Switch & Toggle'
+                        group: 'showcase'
+                        size_hint_y: None
+                        height: 44
+                        font_size: '13sp'
+                        on_state: if self.state == 'down': root.switch_demo('switch_toggle')
+
+                    ToggleButton:
+                        text: 'Progress Bar'
+                        group: 'showcase'
+                        size_hint_y: None
+                        height: 44
+                        font_size: '13sp'
+                        on_state: if self.state == 'down': root.switch_demo('progress')
+
+        BoxLayout:
+            id: showcase_content
+            orientation: 'vertical'
+            padding: 10
+            spacing: 10
+
+
+<TouchtracerScreen>:
+    name: 'touchtracer'
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            padding: 8
+            spacing: 8
+            size_hint_y: None
+            height: 50
+
+            Button:
+                text: '< Back'
+                size_hint_x: None
+                width: 100
+                font_size: '13sp'
+                background_color: 0.75, 0.2, 0.2, 1
+                on_release: root.manager.current = 'main'
+
+            Label:
+                text: 'Touchtracer - Move your finger!'
+                font_size: '16sp'
+                color: 0, 0, 0, 1
+                valign: 'middle'
+
+    TouchtracerWidget:
+
+
+<PicturesScreen>:
+    name: 'pictures'
+
+    canvas.before:
+        Color:
+            rgba: 0.18, 0.18, 0.22, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    FloatLayout:
+        id: pictures_root
+
+    BoxLayout:
+        padding: 8
+        spacing: 8
+        size_hint_y: None
+        height: 50
+        pos_hint: {'top': 1}
+
+        Button:
+            text: '< Back'
+            size_hint_x: None
+            width: 100
+            font_size: '13sp'
+            background_color: 0.75, 0.2, 0.2, 1
+            on_release: root.manager.current = 'main'
+
+        Label:
+            text: 'Pictures - Pinch to zoom, drag to move'
+            font_size: '15sp'
+            color: 1, 1, 1, 1
+            valign: 'middle'
