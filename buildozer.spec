@@ -13,6 +13,7 @@ android.api = 31
 android.minapi = 21
 android.ndk = 25b
 android.sdk = 33
+android.archs = arm64-v8a
 android.entrypoint = org.kivy.android.PythonActivity
 android.compile_sdk_version = 31
 android.gradle_dependencies =
