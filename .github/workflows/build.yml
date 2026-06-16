@@ -3,6 +3,9 @@ name: Build Android APK
 on:
   workflow_dispatch:
 
+env:
+  PYTHONFORANDROID_PREREQUISITES_INSTALL_INTERACTIVE: 0
+
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -20,34 +23,23 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            build-essential git zip unzip \
-            autoconf automake libtool pkg-config \
-            cmake zlib1g-dev libncurses-dev
-
-      - name: Accept Android SDK licenses
-        run: |
-          mkdir -p $HOME/.buildozer/android/platform/android-sdk/licenses
-          echo -e "\n24333f8a63b6825ea9c5514f83c2829b004d1fee" > $HOME/.buildozer/android/platform/android-sdk/licenses/android-sdk-license
-          echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > $HOME/.buildozer/android/platform/android-sdk/licenses/android-sdk-preview-license
-          echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c2829b004d1fee" >> $HOME/.buildozer/android/platform/android-sdk/licenses/android-sdk-license
-          echo -e "\n33b6a2b64607f11b759f320ef9dff4ae5c47d97a" > $HOME/.buildozer/android/platform/android-sdk/licenses/android-googletv-license
-          echo -e "\ne6b7c2ab7fa2298c15165e9583d0222b24b9a7e4" > $HOME/.buildozer/android/platform/android-sdk/licenses/intel-android-extra-license
-          echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > $HOME/.buildozer/android/platform/android-sdk/licenses/android-sdk-arm-dbt-license
-
       - name: Install buildozer
         run: pip install buildozer cython
 
+      - name: Download SDK/NDK/p4a
+        run: |
+          buildozer android p4a -- --help
+
+      - name: Install Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y automake libltdl-dev
+
       - name: Build APK
-        run: buildozer -v android debug
-        env:
-          BUILDOZER_WARN_ON_ROOT: 0
+        run: |
+          buildozer android debug
 
       - name: Upload APK
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: kivy-demo-apk
