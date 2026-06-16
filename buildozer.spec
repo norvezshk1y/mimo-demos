@@ -12,13 +12,14 @@ android.permissions = INTERNET
 android.api = 34
 android.minapi = 24
 android.ndk = 25b
-android.sdk = 34
 android.archs = arm64-v8a
 android.entrypoint = org.kivy.android.PythonActivity
 android.compile_sdk_version = 34
 android.gradle_dependencies =
 android.enable_androidx = True
 android.enable_jetifier = True
+android.accept_sdk_license = True
+p4a.branch = develop
 icon.filename = %(source.dir)s/icon.png
 
 [buildozer]
