@@ -259,6 +259,9 @@ class KivyDemosApp(App):
     icon = 'icon.png'
 
     def build(self):
+        from kivy.lang import Builder
+        from os.path import join, dirname
+        Builder.load_file(join(dirname(__file__), 'main.kv'))
         sm = ScreenManager()
         sm.add_widget(MainScreen(name='main'))
         sm.add_widget(ShowcaseScreen(name='showcase'))
