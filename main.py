@@ -255,7 +255,7 @@ class PicturesScreen(Screen):
 
 
 class KivyDemosApp(App):
-    title = 'Kivy Demos'
+    title = 'Домашняя ЛЛМка'
     icon = 'icon.png'
 
     def build(self):
