@@ -1,6 +1,6 @@
 [app]
-title = Kivy Demos
-package.name = kivydemos
+title = Домашняя ЛЛМка
+package.name = homellm
 package.domain = org.kivy
 source.dir = .
 source.include_exts = py,png,jpg,kv,txt
